@@ -10,6 +10,8 @@ You want an easy method to allow someone to drop CSVs into a directory and have 
 ### ASSUMPTIONS:
  - The CSVs are stored in Google Drive, not Google Shared Drives (there's a limitation on moving those files around as of right now - 11/25/20)
  - This likely won't work for massive files, or things over a certain (unknown at this time) file size.
+ - You will need to update the code / table functions if the CSVs change structure at any point.
+ - Error handling needs to be improved of course, but that's for a later phase. Most of the time, the expectation is that you'd check the job history, or the execution history, and default error notifications to determine if you have an issue with the process described here.
  
 ### INSTRUCTIONS
  - Create a folder in Google Drive to store your CSV files that are pending processing, and then another folder to store processed CSV files.
