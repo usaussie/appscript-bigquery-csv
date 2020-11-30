@@ -16,11 +16,11 @@ You want an easy method to allow someone to drop CSVs into a directory and have 
 ### INSTRUCTIONS
  - Create a folder in Google Drive to store your CSV files that are pending processing, and then another folder to store processed CSV files.
  - Create a new project in google appscript (script.google.com)
- - Copy the Code.gs file contents into appscript, update the variables at the top.
+ - Copy the files from this repo appscript
+ - Make a copy of config.sample.gs and rename as config.gs...then make all your variable/customizations for your BQ project in there. You will NOT make any changes to any other files.
  - Update/write some functions to set up the tables you want. Follow the examples provided, ie: table_characters() and table_places(). Just change what's there, and copy/paste to create new table definitions based on what the CSV file(s) will contain.
- - Update the process_all_pending_csv_files() function's switch/case statement, so that it knows what the first column heading is of each CSV file type. This is how the code parses the CSVs to determine which table function it should use for the BQ load job.
- - Update the doCreateTables() function to point to the appropriate table functions.
- - Run the doCreateTables() function once, which will prompt for permissions, and then create your BQ tables (if you did the above steps correctly).
+ - Look in the Jobs.gs file -- it is the one you'll use to run the jobs / schedule executions for loads.
+ - Run the create_tables_one_time() function once, which will prompt for permissions, and then create your BQ tables (if you did the above steps correctly).
  - Accept the permissions (asking for access for your script to read/write to google drive, bigquery etc)
  - Make sure there are some CSV files into the PENDING google drive folder you set up.
  - Run the process_all_pending_csv_files() function (once, or set a trigger)
