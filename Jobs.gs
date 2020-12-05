@@ -30,7 +30,7 @@ function create_tables_one_time() {
  * 
 */
 
-function process_all_pending_csv_files(){
+function process_all_pending_csv_files() {
   var folder = DriveApp.getFolderById(PENDING_CSV_DRIVE_FOLDER_ID);
   var files = folder.getFiles();
   while (files.hasNext()){
@@ -45,7 +45,7 @@ function process_all_pending_csv_files(){
     
     var doLoad = true;
 
-    var detectedTableFunction = detect_csv_type(firstRowFirstColumn)
+    var detectedTableFunction = detect_csv_type(csvData[0]); // pass in header row to help determine the kind of file this is
     
     if(detectedTableFunction === false) {
       Logger.log('CSV Type: Unknown File Type. Skipping File Name: ' + file.getName());
@@ -77,8 +77,10 @@ function process_all_pending_csv_files(){
         // remove the CSV file from the "Pending" folder 
         file.getParents().next().removeFile(file);
         // add the removed CSV file to the "Processed" folder
-        DriveApp.getFolderById(PROCESSED_CSV_DRIVE_FOLDER_ID).addFile(file);
-        Logger.log('Moving CSV file to Processed folder. File ID: ' + file.getName());
+        // DriveApp.getFolderById(PROCESSED_CSV_DRIVE_FOLDER_ID).addFile(file); // deprecated method. Use moveTo() instead
+        var newFolder = DriveApp.getFolderById(PROCESSED_CSV_DRIVE_FOLDER_ID);
+        file.moveTo(newFolder);
+        Logger.log('Moving CSV file to Processed folder. File ID: ' + file.getName() + ' --> ' + newFolder.getName());
         
       }
 
